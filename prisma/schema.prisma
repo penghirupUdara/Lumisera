@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Plan {
+  FREE
+  PRO
+}
+
+enum EventType {
+  WISUDA
+  WEDDING
+  EVENT
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+}
+
+model User {
+  id            String    @id @default(cuid())
+  username      String    @unique // Untuk subdomain {username}.lumisera.com
+  name          String?
+  email         String    @unique
+  password      String
+  role          Role      @default(USER)
+  plan          Plan      @default(FREE)
+  phone         String?
+  whatsapp      String?   // Untuk tombol chat
+  
+  // Landing Page Settings
+  heroTitle     String?   @default("Abadikan Momen Terbaikmu")
+  heroSubtitle  String?   @default("Fotografi profesional untuk wisuda, wedding, dan event.")
+  heroImage     String?
+  aboutText     String?
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  packages      Package[]
+  portfolios    Portfolio[]
+  bookings      Booking[]
+}
+
+model Package {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  price       Float
+  features    String[] // Array fitur: ["1 Jam Photoshoot", "Unlimited Files"]
+  
+  bookings    Booking[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Portfolio {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title       String?
+  imageUrl    String
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Booking {
+  id          String        @id @default(cuid())
+  userId      String
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  clientName  String
+  clientEmail String?
+  clientPhone String
+  
+  date        DateTime
+  eventType   EventType
+  
+  packageId   String
+  package     Package       @relation(fields: [packageId], references: [id])
+  
+  status      BookingStatus @default(PENDING)
+  notes       String?
+
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
