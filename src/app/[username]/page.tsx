@@ -62,7 +62,7 @@ export default async function PhotographerLandingPage({ params }: { params: { us
           <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl font-bold text-center mb-16">Portfolio</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {user.portfolios.map(item => (
+              {user.portfolios.map((item: any) => (
                 <div key={item.id} className="aspect-[4/5] bg-neutral-200 rounded-2xl overflow-hidden relative group">
                   <img src={item.imageUrl} alt={item.title || "Portfolio"} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 </div>

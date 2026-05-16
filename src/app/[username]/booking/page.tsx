@@ -62,7 +62,7 @@ export default async function BookingPage({
             <label className="block text-sm font-medium mb-2">Pilih Paket</label>
             <select required name="packageId" defaultValue={selectedPackageId || ""} className="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-black">
               <option value="" disabled>-- Pilih Paket --</option>
-              {user.packages.map(pkg => (
+              {user.packages.map((pkg: any) => (
                 <option key={pkg.id} value={pkg.id}>{pkg.name} - Rp {pkg.price.toLocaleString("id-ID")}</option>
               ))}
             </select>
