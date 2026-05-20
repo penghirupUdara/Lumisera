@@ -34,12 +34,12 @@ export default function Home() {
             <Link href="#gallery" className="text-sm font-medium text-gray-300 hover:text-white transition-colors hidden sm:block">
               Portofolio
             </Link>
-            <Link href="#pricing" className="text-sm font-medium text-gray-300 hover:text-white transition-colors hidden sm:block">
-              Paket Harga
+            <Link href="#features" className="text-sm font-medium text-gray-300 hover:text-white transition-colors hidden sm:block">
+              Keunggulan Kami
             </Link>
             <Link
               href="#pricing"
-              className="bg-white text-black px-5 py-2.5 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors"
+              className="bg-white text-black px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium hover:bg-gray-200 transition-colors whitespace-nowrap"
             >
               Booking Sekarang
             </Link>
